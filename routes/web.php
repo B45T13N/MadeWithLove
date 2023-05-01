@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{any}', [HomeController::class,'index'])->where('any', '\b[login]|\b[register]')->middleware('auth');
+Route::get('/', [HomeController::class,'index'])->where('any', '\b[login]|\b[register]')->middleware('auth');
 
 Auth::routes();
