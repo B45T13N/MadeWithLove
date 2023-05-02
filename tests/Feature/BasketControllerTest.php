@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Item;
+use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -57,5 +59,26 @@ class BasketControllerTest extends TestCase
         $response = $this->post("/api/basket/addItem", ['userId' => $userId, 'itemId'=> 1]);
 
         $response->assertStatus(202);
+    }
+
+    public function test_add_item_increment_counter_and_return_200(): void
+    {
+        $this->seed(DatabaseSeeder::class);
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $item = Item::factory()->create();
+        $initCount = $item->counterAdded;
+        $response = $this->get("/api/basket/{$user->id}");
+
+        $response = $this->actingAs($user)->post('/api/basket/addItem', [
+            'itemId' => $item->id,
+            'userId' => $user->id
+        ]);
+
+        $response->assertStatus(201);
+
+        $this->assertEquals($initCount, $item->counterAdded);
     }
 }
