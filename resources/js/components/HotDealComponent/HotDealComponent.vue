@@ -2,6 +2,7 @@
     <v-carousel hide-delimiter-background
                 :show-arrows="false"
                 cycle
+                v-model="carouselIndex"
                 :interval="interval"
                 :height="400"
     >
@@ -17,6 +18,7 @@ export default {
     components: {CarouselItem},
     data(){
         return{
+            carouselIndex: 0,
             interval: 3000,
             apiUrl : import.meta.env.VITE_BASE_URL + '/api/hotDeals',
             items: [],
