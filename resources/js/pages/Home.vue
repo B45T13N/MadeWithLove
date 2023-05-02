@@ -21,7 +21,6 @@
     export default {
         components: {BasketComponent, HotDealComponent, ListCardDisplayComponent},
         mounted() {
-            console.log('Component home mounted.')
         }
     }
 </script>

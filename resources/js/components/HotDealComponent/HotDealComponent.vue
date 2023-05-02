@@ -40,7 +40,6 @@ export default {
     },
     mounted() {
         this.getItems();
-        console.log('Component hotdeal mounted.')
     },
     name: "HotDealComponent"
 }
